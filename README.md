@@ -87,6 +87,10 @@ This generates a new password and a new 2FA secret, and ends all sessions. Use i
 - Config backups: `/var/lib/hypanel/backups`
 - A reload can take about a second to reach all nginx workers, so a request sent immediately after a change may still see the old config.
 
+## License
+
+MIT. See `LICENSE`.
+
 ## About this page
 
 This Guide starts as the panel's README, and after that it's your own note: panel upgrades never replace it. It's saved at `/var/lib/hypanel/guide.md`, and earlier versions go to `/var/lib/hypanel/backups`. Hide it from the menu or the Dashboard in Settings.
