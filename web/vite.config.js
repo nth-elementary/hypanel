@@ -1,0 +1,8 @@
+import { defineConfig } from 'vite';
+import { svelte } from '@sveltejs/vite-plugin-svelte';
+
+export default defineConfig({
+  plugins: [svelte()],
+  build: { outDir: 'dist', emptyOutDir: true, chunkSizeWarningLimit: 1200 },
+  server: { proxy: { '/api': { target: 'http://127.0.0.1:7777', ws: true } } },
+});

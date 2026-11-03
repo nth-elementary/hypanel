@@ -1,0 +1,271 @@
+:root {
+  color-scheme: light;
+  --bg: #f4f4f2;
+  --surface: #fcfcfb;
+  --surface-2: #f0efec;
+  --border: #e3e2de;
+  --grid: #e9e8e4;
+  --text: #0b0b0b;
+  --text-2: #52514e;
+  --text-3: #76756f;
+  --accent: #2a78d6;
+  --accent-ink: #ffffff;
+  --series-1: #2a78d6;
+  --series-2: #eb6834;
+  --good: #0d7a3f;
+  --warn: #9a6500;
+  --bad: #c62f2e;
+  --bad-soft: #fbe9e8;
+  --warn-soft: #fbf1dc;
+  --good-soft: #e3f4ea;
+  --radius: 10px;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:where(:not([data-theme='light'])) {
+    color-scheme: dark;
+    --bg: #111110;
+    --surface: #1a1a19;
+    --surface-2: #242423;
+    --border: #2f2f2d;
+    --grid: #2a2a28;
+    --text: #f0efec;
+    --text-2: #c3c2b7;
+    --text-3: #93928a;
+    --accent: #3987e5;
+    --series-1: #3987e5;
+    --series-2: #d95926;
+    --good: #4cc27f;
+    --warn: #e0a93a;
+    --bad: #e66767;
+    --bad-soft: #3a1f1e;
+    --warn-soft: #36290f;
+    --good-soft: #15301f;
+  }
+}
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #111110;
+  --surface: #1a1a19;
+  --surface-2: #242423;
+  --border: #2f2f2d;
+  --grid: #2a2a28;
+  --text: #f0efec;
+  --text-2: #c3c2b7;
+  --text-3: #93928a;
+  --accent: #3987e5;
+  --series-1: #3987e5;
+  --series-2: #d95926;
+  --good: #4cc27f;
+  --warn: #e0a93a;
+  --bad: #e66767;
+  --bad-soft: #3a1f1e;
+  --warn-soft: #36290f;
+  --good-soft: #15301f;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font: 14px/1.45 -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+}
+#app { height: 100%; }
+h1 { font-size: 20px; font-weight: 600; margin: 0; }
+h2 { font-size: 15px; font-weight: 600; margin: 0; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+code, .mono { font-family: var(--mono); font-size: 12.5px; }
+.muted { color: var(--text-3); }
+.small { font-size: 12.5px; }
+.grow { flex: 1; min-width: 0; }
+.row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.stack { display: flex; flex-direction: column; gap: 12px; }
+.spread { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.nowrap { white-space: nowrap; }
+.break { word-break: break-all; }
+
+.page { padding: 24px; max-width: 1400px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px; }
+.page-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; min-height: 34px; flex-shrink: 0; }
+
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); }
+.card-pad { padding: 16px; }
+.card-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 16px; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+
+button, .btn {
+  font: inherit; font-size: 13px; color: var(--text); background: var(--surface);
+  border: 1px solid var(--border); border-radius: 7px; padding: 5px 11px; cursor: pointer;
+  display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; min-height: 30px;
+}
+button:hover:not(:disabled), .btn:hover { background: var(--surface-2); text-decoration: none; }
+button:disabled { opacity: .5; cursor: default; }
+.icon-btn { width: 30px; height: 30px; padding: 0; justify-content: center; flex: none; }
+button.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+button.primary:hover:not(:disabled) { filter: brightness(1.08); background: var(--accent); }
+button.danger { color: var(--bad); }
+button.danger:hover:not(:disabled) { background: var(--bad-soft); }
+button.link { background: none; border: none; padding: 0; min-height: 0; color: var(--accent); }
+button.link:hover:not(:disabled) { background: none; text-decoration: underline; }
+button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, a:focus-visible {
+  outline: 2px solid var(--accent); outline-offset: 1px;
+}
+
+input, select, textarea {
+  font: inherit; font-size: 13px; color: var(--text); background: var(--surface);
+  border: 1px solid var(--border); border-radius: 7px; padding: 4px 9px; min-height: 30px; max-width: 100%;
+}
+/* Native selects take their own height, different in every browser, so they don't line up
+   with the inputs and buttons beside them. The arrow's grey reads on both themes. */
+select:not([multiple]) {
+  appearance: none; -webkit-appearance: none; padding-right: 26px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M3 4.5 6 7.5 9 4.5' fill='none' stroke='%2393928a' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 8px center; background-size: 12px;
+}
+input[type='checkbox'] { min-height: 0; }
+textarea { width: 100%; padding: 6px 9px; font-family: var(--mono); font-size: 12.5px; }
+label.field { display: flex; flex-direction: column; gap: 4px; font-size: 12.5px; color: var(--text-2); }
+label.field input, label.field select, label.field textarea { width: 100%; }
+.hint { font-size: 12px; color: var(--text-3); }
+.form { display: flex; flex-direction: column; gap: 12px; }
+.form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
+
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; }
+th { font-weight: 500; font-size: 12px; color: var(--text-3); text-align: left; padding: 9px 14px; border-bottom: 1px solid var(--border); white-space: nowrap; }
+th button.link { color: inherit; font-size: 12px; }
+td { padding: 8px 14px; border-bottom: 1px solid var(--grid); vertical-align: middle; }
+tr:last-child td { border-bottom: none; }
+tbody tr:hover { background: color-mix(in srgb, var(--surface-2) 50%, transparent); }
+td.actions { text-align: right; white-space: nowrap; }
+td.actions button { margin-left: 4px; }
+.empty { padding: 32px; text-align: center; color: var(--text-3); }
+
+.badge { display: inline-flex; align-items: center; gap: 5px; padding: 1px 8px; border-radius: 99px; font-size: 12px; background: var(--surface-2); color: var(--text-2); white-space: nowrap; }
+.badge.good { background: var(--good-soft); color: var(--good); }
+.badge.warn { background: var(--warn-soft); color: var(--warn); }
+.badge.bad { background: var(--bad-soft); color: var(--bad); }
+
+.notice { padding: 10px 14px; border-radius: 8px; font-size: 13px; background: var(--warn-soft); color: var(--warn); }
+.notice.bad { background: var(--bad-soft); color: var(--bad); }
+.error { color: var(--bad); font-size: 13px; white-space: pre-wrap; word-break: break-word; }
+
+.tabs { display: flex; gap: 2px; border-bottom: 1px solid var(--border); overflow-x: auto; }
+.tabs button { border: none; background: none; border-radius: 0; padding: 8px 12px; color: var(--text-2); border-bottom: 2px solid transparent; margin-bottom: -1px; }
+.tabs button:hover:not(:disabled) { background: none; color: var(--text); }
+.tabs button.on { color: var(--text); border-bottom-color: var(--accent); font-weight: 500; }
+
+.log { background: #111110; color: #e6e5e0; font-family: var(--mono); font-size: 12px; line-height: 1.5; padding: 12px; border-radius: 8px; overflow: auto; white-space: pre-wrap; word-break: break-all; margin: 0; }
+
+.overlay { position: fixed; inset: 0; background: rgb(0 0 0 / .45); display: flex; align-items: center; justify-content: center; padding: 16px; z-index: 50; }
+/* dvh, because 100vh on a phone includes the part hidden behind the browser's toolbar, which
+   would put a dialog's buttons out of reach. */
+.modal { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; width: 100%; max-width: 560px; max-height: calc(100vh - 32px); max-height: calc(100dvh - 32px); display: flex; flex-direction: column; box-shadow: 0 20px 50px rgb(0 0 0 / .25); }
+.modal.wide { max-width: 1100px; height: calc(100vh - 32px); height: calc(100dvh - 32px); }
+.modal-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 18px; border-bottom: 1px solid var(--border); }
+.modal-head h2 { min-width: 0; }
+.modal-head button { flex: none; }
+.modal-body { padding: 18px; overflow: auto; flex: 1; min-height: 0; }
+.modal.wide .modal-body { display: flex; flex-direction: column; gap: 10px; }
+.modal-foot { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; padding: 12px 18px; border-top: 1px solid var(--border); }
+
+.toast { position: fixed; bottom: 20px; right: 20px; background: var(--text); color: var(--surface); padding: 10px 16px; border-radius: 8px; z-index: 60; max-width: min(480px, calc(100vw - 40px)); font-size: 13px; }
+.toast.bad { background: var(--bad); color: #fff; white-space: pre-wrap; }
+
+.shell { display: flex; height: 100%; }
+.side { width: 200px; flex: none; background: var(--surface); border-right: 1px solid var(--border); display: flex; flex-direction: column; padding: 14px 10px; gap: 2px; overflow-y: auto; }
+.brand { display: flex; align-items: center; gap: 9px; font-weight: 600; font-size: 15px; padding: 2px 8px 14px; }
+.brand svg { width: 24px; height: 24px; flex: none; }
+.side a { display: flex; align-items: center; gap: 10px; color: var(--text-2); padding: 7px 9px; border-radius: 7px; }
+.side a:hover { background: var(--surface-2); text-decoration: none; }
+.side a.on { background: var(--surface-2); color: var(--text); font-weight: 500; }
+svg.icon { width: 16px; height: 16px; flex: none; stroke: currentColor; fill: none; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+svg.icon-dots { stroke-width: 3; }
+.main { flex: 1; min-width: 0; overflow-y: auto; }
+.menu-btn { display: none; }
+
+/* Fingers instead of a pointer. Below 16px, iOS zooms the whole page when a field gets focus. */
+@media (max-width: 760px), (hover: none) {
+  button, .btn { min-height: 38px; }
+  .icon-btn { width: 38px; height: 38px; }
+  .chip { min-height: 32px; }
+  input:not([type='checkbox']):not([type='radio']), select { min-height: 38px; font-size: 16px; }
+  textarea, .editor .cm-editor { font-size: 16px; }
+  input[type='checkbox'] { width: 20px; height: 20px; }
+}
+
+@media (max-width: 760px) {
+  .overlay { padding: 8px; }
+  .modal { max-height: calc(100vh - 16px); max-height: calc(100dvh - 16px); }
+  .modal.wide { height: calc(100vh - 16px); height: calc(100dvh - 16px); }
+  .shell { flex-direction: column; }
+  .side { width: 100%; flex-direction: row; overflow-x: auto; padding: 8px; border-right: none; border-bottom: 1px solid var(--border); }
+  .brand { padding: 2px 8px; }
+  .brand span { display: none; }
+  .side a span { display: none; }
+  .side .side-gap { display: none; }
+  .page { padding: 16px; }
+}
+
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; }
+.tile { padding: 14px 16px; }
+.tile .label { font-size: 12.5px; color: var(--text-2); }
+.tile .value { font-size: 24px; font-weight: 600; margin-top: 2px; font-variant-numeric: tabular-nums; }
+.tile .sub { font-size: 12px; color: var(--text-3); margin-top: 2px; font-variant-numeric: tabular-nums; }
+.charts { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 12px; }
+@media (max-width: 480px) { .charts { grid-template-columns: 1fr; } }
+
+.login { min-height: 100%; display: flex; align-items: center; justify-content: center; padding: 16px; }
+.login .card { width: 100%; max-width: 360px; padding: 24px; }
+
+/* The editor fills the box it's given and never insists on more, because a child taller than
+   its box spills over whatever comes next. Only a dialog's flexible body sets a minimum. */
+.editor { flex: 1; min-width: 0; min-height: 0; display: flex; flex-direction: column; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+.modal-body > .editor { min-height: 240px; }
+.editor .cm-editor { flex: 1; min-height: 0; font-size: 13px; }
+.editor .cm-scroller { font-family: var(--mono); overflow: auto; }
+
+.charts > * { min-width: 0; }
+
+.stat { font-variant-numeric: tabular-nums; }
+.stat.warn { color: var(--warn); font-weight: 600; }
+.stat.bad { color: var(--bad); font-weight: 600; }
+
+.chip { padding: 2px 10px; min-height: 26px; border-radius: 99px; font-size: 12px; color: var(--text-2); white-space: normal; word-break: break-all; text-align: left; }
+.chip.on { color: var(--text); border-color: var(--accent); }
+
+.drop-target, tr.drop-target td { background: color-mix(in srgb, var(--accent) 18%, transparent) !important; }
+button.drop-target { outline: 2px dashed var(--accent); outline-offset: 1px; }
+.crumb { padding: 2px 4px; border-radius: 5px; }
+tr[draggable='true'] { cursor: default; }
+
+.drop-banner { position: fixed; top: 16px; left: 50%; transform: translateX(-50%); z-index: 40; background: var(--accent); color: var(--accent-ink); padding: 8px 16px; border-radius: 8px; font-size: 13px; pointer-events: none; box-shadow: 0 6px 20px rgb(0 0 0 / .25); max-width: calc(100vw - 32px); word-break: break-all; }
+.drop-banner code { font-size: 12.5px; }
+
+.dialog-text { white-space: pre-wrap; word-break: break-word; }
+.dialog-text.mono { background: var(--surface-2); border-radius: 7px; padding: 10px 12px; max-height: 50vh; overflow: auto; }
+
+table.grid td.value { max-width: 320px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; cursor: cell; }
+table.grid td.editing { min-width: 220px; background: var(--surface-2); }
+table.grid td.editing input:not([type='checkbox']), table.grid td.editing textarea { width: 100%; font-family: var(--mono); font-size: 12.5px; }
+
+td.command { max-width: 520px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.markdown { line-height: 1.6; overflow-wrap: anywhere; }
+.markdown > :first-child { margin-top: 0; }
+.markdown > :last-child { margin-bottom: 0; }
+.markdown h1 { font-size: 22px; margin: 22px 0 10px; }
+.markdown h2 { font-size: 17px; margin: 20px 0 8px; }
+.markdown h3 { font-size: 15px; margin: 16px 0 6px; }
+.markdown p, .markdown ul, .markdown ol { margin: 8px 0; }
+.markdown li { margin: 3px 0; }
+.markdown code { background: var(--surface-2); padding: 1px 5px; border-radius: 4px; }
+.markdown pre { background: var(--surface-2); padding: 10px 12px; border-radius: 8px; overflow-x: auto; }
+.markdown pre code { background: none; padding: 0; }
+.markdown blockquote { margin: 8px 0; padding-left: 12px; border-left: 3px solid var(--border); color: var(--text-2); }
+.markdown table { width: auto; margin: 8px 0; }
+.guide-preview { max-height: 190px; overflow: hidden; margin-bottom: 8px; }
+
+.progress { height: 6px; margin: 8px 0 6px; background: var(--surface-2); border-radius: 99px; overflow: hidden; }
+.progress > div { height: 100%; background: var(--accent); border-radius: 99px; transition: width .2s linear; }
+.upload-stats { display: flex; justify-content: space-between; gap: 4px 16px; flex-wrap: wrap; font-variant-numeric: tabular-nums; }
